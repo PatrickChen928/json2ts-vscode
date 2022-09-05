@@ -2,7 +2,7 @@
   "name": "json2ts-vsc",
   "displayName": "json2ts-vsc",
   "description": "convert json to ts type",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "icon": "images/json2ts.png",
   "engines": {
     "vscode": "^0.10.6"
