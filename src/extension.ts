@@ -1,26 +1,74 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as copyPaste from "copy-paste";
+let request = require("request");
+import json2ts from "@cyly/json2ts";
+import { isJson } from "./util";
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "json2ts-vscode" is now active!');
+    let clipboardJson2ts = vscode.commands.registerCommand("convert.json2ts", () => {
+        copyPaste.paste((error, content) => {
+            if (isJson(content)) {
+                convert(content);
+            } else {
+                vscode.window.showErrorMessage("Clipboard has no valid JSON content.");
+            }
+        });
+    });
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('json2ts-vscode.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from json2ts-vscode!');
-	});
+    let restJson2ts = vscode.commands.registerCommand("rest.json2ts", () => {
+        copyPaste.paste((error, content) => {
+            if (content && content.indexOf("http") > -1) {
+                callRestService(content);
+            } else {
+                vscode.window.showInputBox({ prompt: "Insert your REST-Service URL." })
+                    .then((userInput) => {
+                        if (content && content.indexOf("http") > -1) {
+                            callRestService(userInput);
+                        } else {
+                            vscode.window.showErrorMessage("No valid REST-Service URL.");
+                        }
+                    });
+            }
+        });
 
-	context.subscriptions.push(disposable);
+        function callRestService(url: string) {
+            vscode.window.setStatusBarMessage("Call " + url + "...");
+            request(url, (error, response, body) => {
+                if (isJson(body)) {
+                    convert(body);
+                } else {
+                    vscode.window.showErrorMessage("REST-Service has no valid JSON result.");
+                }
+            });
+        }
+    });
+
+    context.subscriptions.push(clipboardJson2ts, restJson2ts);
+}
+
+function convert(content: string) {
+    vscode.window.setStatusBarMessage("Convert JSON to TypeScript interfaces...");
+
+    try {
+        let result = json2ts(content, {
+            comment: "block",
+            parseArray: true,
+            optimizeArrayOptional: true,
+            genType: "interface"
+        });
+        vscode.window.activeTextEditor.edit((editBuilder) => {
+            let startLine = vscode.window.activeTextEditor.selection.start.line;
+            let lastCharIndex = vscode.window.activeTextEditor.document.lineAt(startLine).text.length;
+            let position = new vscode.Position(startLine, lastCharIndex);
+            editBuilder.insert(position, result);
+
+            vscode.window.setStatusBarMessage("Here are your TypeScript interfaces... Enjoy! :)");
+        });
+    } catch(e) {}
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() {
+}
