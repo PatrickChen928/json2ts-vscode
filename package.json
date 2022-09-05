@@ -4,7 +4,7 @@
   "description": "convert json to ts type",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.71.0"
+    "vscode": "^0.10.6"
   },
   "categories": [
     "Programming Languages",
