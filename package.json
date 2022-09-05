@@ -14,7 +14,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:typescript"
+    "onCommand:convert.json2ts",
+    "onCommand:rest.json2ts"
   ],
   "main": "./out/extension.js",
   "contributes": {
