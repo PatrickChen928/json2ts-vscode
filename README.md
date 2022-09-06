@@ -16,7 +16,8 @@ convert `JSON` or `JS object` to ts type
 
 ### JSON / JS object
 
-json2ts converts a JSON from clipboard to TypeScript interfaces with `cmd+alt+V` or `ctrl+alt+V`.
+json2ts converts a JSON from clipboard to TypeScript interfaces with `cmd+alt+V` or `ctrl+alt+V`.  
+**In mac, `^ + ⌥ + V`**
 
 ```javascript
 // copy content below
@@ -67,7 +68,8 @@ type Result$0Type = {
 ```
 
 ### REST-Service
-Copy a REST-Service URL to clipboard and insert TypeScript interfaces with `cmd+alt+X` or `ctrl+alt+X`.
+Copy a REST-Service URL to clipboard and insert TypeScript interfaces with `cmd+alt+X` or `ctrl+alt+X`.  
+**In mac, `^ + ⌥ + X`**
 
 ## Thanks
 
