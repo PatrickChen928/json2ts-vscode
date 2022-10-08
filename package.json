@@ -2,7 +2,7 @@
   "name": "json2ts-vsc",
   "displayName": "json2ts-vsc",
   "description": "convert json to ts type",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "icon": "images/jt.png",
   "engines": {
     "vscode": "^0.10.6"
@@ -33,42 +33,42 @@
       "title": "json2ts-vsc",
       "properties": {
         "json2ts.splitObject": {
-          "type": "boolean", 
+          "type": "boolean",
           "description": "If false, will return a whole object",
           "default": true
         },
         "json2ts.parseArray": {
-          "type": "boolean", 
+          "type": "boolean",
           "description": "If false, array will return Array<any>",
           "default": true
         },
         "json2ts.required": {
-          "type": "boolean", 
+          "type": "boolean",
           "description": "Property is required",
           "default": true
         },
         "json2ts.semicolon": {
-          "type": "boolean", 
+          "type": "boolean",
           "description": "End with semi",
           "default": false
         },
         "json2ts.typePrefix": {
-          "type": "string", 
+          "type": "string",
           "description": "The prefix of type / interface name",
           "default": ""
         },
         "json2ts.typeSuffix": {
-          "type": "string", 
+          "type": "string",
           "description": "The suffix of type / interface name",
           "default": ""
         },
         "json2ts.indent": {
-          "type": "number", 
+          "type": "number",
           "description": "The indent of result",
           "default": 2
         },
         "json2ts.comment": {
-          "type": "string", 
+          "type": "string",
           "description": "The style of comment in result",
           "enum": [
             "false",
@@ -78,7 +78,7 @@
           "default": "block"
         },
         "json2ts.genType": {
-          "type": "string", 
+          "type": "string",
           "description": "Generate interface or type",
           "enum": [
             "interface",
@@ -87,7 +87,7 @@
           "default": "interface"
         },
         "json2ts.optimizeArrayOptional": {
-          "type": "boolean", 
+          "type": "boolean",
           "description": "Reuse object types in arrays, will reutrn optional property",
           "default": true
         }
