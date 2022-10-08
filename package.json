@@ -29,6 +29,70 @@
         "title": "Convert a REST-URL with json result to TypeScript interfaces"
       }
     ],
+    "configuration": {
+      "title": "json2ts-vsc",
+      "properties": {
+        "json2ts.splitObject": {
+          "type": "boolean", 
+          "description": "If false, will return a whole object",
+          "default": true
+        },
+        "json2ts.parseArray": {
+          "type": "boolean", 
+          "description": "If false, array will return Array<any>",
+          "default": true
+        },
+        "json2ts.required": {
+          "type": "boolean", 
+          "description": "Property is required",
+          "default": true
+        },
+        "json2ts.semicolon": {
+          "type": "boolean", 
+          "description": "End with semi",
+          "default": false
+        },
+        "json2ts.typePrefix": {
+          "type": "string", 
+          "description": "The prefix of type / interface name",
+          "default": ""
+        },
+        "json2ts.typeSuffix": {
+          "type": "string", 
+          "description": "The suffix of type / interface name",
+          "default": ""
+        },
+        "json2ts.indent": {
+          "type": "number", 
+          "description": "The indent of result",
+          "default": 2
+        },
+        "json2ts.comment": {
+          "type": "string", 
+          "description": "The style of comment in result",
+          "enum": [
+            "false",
+            "inline",
+            "block"
+          ],
+          "default": "block"
+        },
+        "json2ts.genType": {
+          "type": "string", 
+          "description": "Generate interface or type",
+          "enum": [
+            "interface",
+            "type"
+          ],
+          "default": "interface"
+        },
+        "json2ts.optimizeArrayOptional": {
+          "type": "boolean", 
+          "description": "Reuse object types in arrays, will reutrn optional property",
+          "default": true
+        }
+      }
+    },
     "keybindings": [
       {
         "command": "convert.json2ts",

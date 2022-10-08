@@ -50,13 +50,28 @@ export function activate(context: vscode.ExtensionContext) {
 
 function convert(content: string) {
     vscode.window.setStatusBarMessage("Convert JSON to TypeScript interfaces...");
-
+    const spiltObject = vscode.workspace.getConfiguration().get("json2ts.splitObject");
+    const parseArray = vscode.workspace.getConfiguration().get("json2ts.parseArray");
+    const required = vscode.workspace.getConfiguration().get("json2ts.required");
+    const semicolon = vscode.workspace.getConfiguration().get("json2ts.semicolon");
+    const typePrefix = vscode.workspace.getConfiguration().get("json2ts.typePrefix");
+    const typeSuffix = vscode.workspace.getConfiguration().get("json2ts.typeSuffix");
+    const indent = vscode.workspace.getConfiguration().get("json2ts.indent");
+    const comment = vscode.workspace.getConfiguration().get("json2ts.comment");
+    const genType = vscode.workspace.getConfiguration().get("json2ts.genType");
+    const optimizeArrayOptional = vscode.workspace.getConfiguration().get("json2ts.optimizeArrayOptional");
     try {
         let result = json2ts(content, {
-            comment: "block",
-            parseArray: true,
-            optimizeArrayOptional: true,
-            genType: "interface"
+            splitType: spiltObject,
+            parseArray,
+            required,
+            semicolon,
+            typePrefix,
+            typeSuffix,
+            indent,
+            comment,
+            genType,
+            optimizeArrayOptional
         });
         vscode.window.activeTextEditor.edit((editBuilder) => {
             let startLine = vscode.window.activeTextEditor.selection.start.line;
